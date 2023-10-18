@@ -1,0 +1,466 @@
+<!DOCTYPE html> <!-- 定义文档类型为HTML -->
+<html lang="en"> <!-- 设置文档的语言为英语 -->
+<head> <!-- head标签，包含网页的元数据和样式信息 -->
+  <meta charset="UTF-8"> <!-- 设置文档的字符编码为UTF-8 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- 设置视口的宽度和初始缩放级别 -->
+  <title>Viaje En Paris - Home</title> <!-- 设置文档标题 -->
+  <!-- style标签，包含内联CSS样式定义 -->
+  <style>
+    /* 设置整个文档的背景和文本样式 */
+    body {
+      margin: 0; /* 设置外边距为0 */
+      padding: 0; /* 设置内边距为0 */
+      background-image: url("./resource/img/paris-background.jpg?w=2071&q=80"), url("https://images5.alphacoders.com/887/887833.jpg?w=2071&q=80"); /* 设置背景图片 */
+      background-size: cover; /* 背景图片适应容器大小 */
+      background-position: center; /* 设置背景图片位置为中心 */
+      background-attachment: fixed; /* 背景图片固定 */
+      color: white; /* 文本颜色为白色 */
+      font-family: Georgia, 'Times New Roman', Times, serif, sans-serif; /* 设置字体 */
+      height: 100%; /* 高度设置为100% */
+    }
+    /* 定义页面顶部导航栏样式 */
+    header {
+      background-color: rgba(35, 72, 85, 0.759); /* 设置顶部导航栏背景颜色和透明度 */
+      color: rgb(207, 194, 194); /* 字体颜色为白色 */
+      padding: 10px; /* 顶部导航栏内边距 */
+      position: fixed; /* 固定定位 */
+      top: 0; /* 顶部对齐 */
+      left: 0; /* 左对齐 */
+      width: 100%; /* 宽度为100% */
+      z-index: 1; /* 层级 */
+    }
+    /* 定义导航栏样式 */
+    nav {
+      display: flex; /* 使用弹性布局 */
+      justify-content: space-between; /* 项目在主轴上的分布方式 */
+      align-items: center; /* 项目在交叉轴上的对齐方式 */
+    }
+    /* 定义导航栏中的无序列表样式 */
+    nav ul {
+      list-style: none; /* 去掉列表样式 */
+      margin: 0; /* 外边距为0 */
+      padding: 0; /* 内边距为0 */
+      display: flex; /* 使用弹性布局 */
+    }
+    /* 定义导航栏中的列表项样式 */
+    nav ul li {
+      margin: 0 10px; /* 左右外边距为10px */
+    }
+    /* 定义导航栏中的链接样式 */
+    nav ul li a {
+      display: block;
+      height: 20px; /* 设置按钮高度 */
+      line-height: 20px; /* 设置垂直居中 */
+      color: white; /* 链接文本颜色为白色 */
+      text-decoration: none; /* 去掉下划线 */
+      font-weight: bold; /* 字体加粗 */
+    }
+    /* 定义导航栏中链接悬停时的样式 */
+    nav ul li a:hover {
+      color: rgb(21, 252, 0); /* 链接鼠标悬停时的颜色 */
+    }
+    
+    li:last-child a {
+    margin-right: 10px; /* 调整右边距的大小 */
+    }
+
+    /* 定义下拉菜单样式 */
+    .dropdown {
+      position: relative; /* 相对定位 */
+      display: inline-block; /* 内联块级元素 */
+      margin-right: 20px; /* 增加右侧外边距为30px */
+    }
+    /* 定义下拉菜单内容样式 */
+    .dropdown-content {
+      display: none; /* 初始不显示 */
+      position: absolute; /* 绝对定位 */
+      background-color: rgba(0, 0, 0, 0.5); /* 背景颜色和透明度 */
+      min-width: 160px; /* 最小宽度 */
+      z-index: 1; /* 层级 */
+    }
+    /* 定义鼠标悬停下拉菜单时的样式 */
+    .dropdown:hover .dropdown-content {
+      display: block; /* 鼠标悬停时显示 */
+    }
+    /* 定义下拉菜单中的链接样式 */
+    .dropdown-content a {
+      color: white; /* 链接文本颜色为白色 */
+      padding: 12px 16px; /* 内边距 */
+      text-decoration: none; /* 去掉下划线 */
+      display: block; /* 块级元素 */
+    }
+    /* 定义鼠标悬停下拉菜单链接时的样式 */
+    .dropdown-content a:hover {
+      background-color: rgba(167, 174, 176, 0.425); /* 链接鼠标悬停时的背景颜色和透明度 */
+    }
+    
+    /* 定义介绍部分样式 */
+    .intro {
+      text-align: center; /* 文本居中 */
+      padding: 100px 0; /* 上下内边距 */
+      background-color: rgba(6, 5, 5, 0.5); /* 背景颜色和透明度 */
+      position: relative; /* 相对定位 */
+      width: auto; /* 宽度为165% */
+      opacity: 0;
+      transition: opacity 3s ease;
+    }
+
+    .intro.show {
+      opacity: 1;
+    }
+   
+    /* 定义介绍部分标题样式 */
+    .intro h1 {
+      font-size: 5em; /* 字体大小 */
+      font-weight: bold; /* 字体加粗 */
+      text-shadow: 2px 2px rgb(112, 115, 113); /* 文本阴影 */
+      margin: 0 auto; /* 外边距为0 */
+    }
+    /* 定义介绍部分段落样式 */
+    .intro p {
+      font-size: 1.5em; /* 字体大小 */
+      text-shadow: 2px 2px rgb(82, 82, 82); /* 文本阴影 */
+      margin: 0 auto; /* 外边距为0 */
+    }
+    /* 定义内容部分样式 */
+    .content {
+      text-align: left;
+      padding: 50px 0; /* 上下内边距 */
+      background-color: rgba(6, 5, 5, 0.688); /* 背景颜色和透明度 */
+      position: relative; /* 相对定位 */
+      width: auto; /* 宽度为1665% */
+      margin-top: 650px; /* 顶部外边距为600px */
+    }
+    /* 定义内容部分标题样式 */
+    .content h1 {
+      font-size: 5em; /* 字体大小 */
+      text-align: center;
+    }
+    .content h2 {
+      font-size: 3em; /* 字体大小 */
+      text-align: left; 
+      padding-left: 20px;
+      padding-top: 40px;
+    }
+    /* 定义内容部分段落样式 */
+    .content p {
+      font-size: 1.2em; /* 字体大小 */
+      text-shadow: 2px 2px rgb(82, 82, 82); /* 文本阴影 */
+      text-align: left; 
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+    .content iframe {
+      margin-left: 50px
+    }
+    
+    .content img {
+      text-align: left; 
+      padding-left: 20px;
+    }
+
+    table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid rgb(255, 255, 255);
+        }
+        th, td {
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #336c9aca;
+        }
+
+  </style> <!-- style标签，结束 -->
+</head> <!-- head标签，结束 -->
+<body> <!-- body标签，用于包含网页的主要内容 -->
+  <header> <!-- header标签，包含网页的页眉部分 -->
+    <nav> <!-- nav标签，用于导航链接的容器 -->
+      <ul> <!-- ul标签，无序列表 -->
+        <li><a href="#home"><img src="./resource/img/logo-no-background.png" onerror="this.src='https://github.com/WeJ-Ch/Pt2-Viaje-en-Francia/blob/main/Web/resource/img/logo-no-background.png?raw=true'" width="130px" alt="image"></a></li>
+        <!-- li标签，列表项；a标签，超链接；#home是超链接的目标锚点 -->
+        <li><a href="#paris">París</a></li>
+        <!-- li标签，列表项；a标签，超链接；#paris是超链接的目标锚点 -->
+        <li><a href="#calendario">Calendario</a></li>
+        <li><a href="#alojamiento">Alojamiento</a></li>
+        <!-- li标签，列表项；a标签，超链接；#alojamiento是超链接的目标锚点 -->
+      </ul> <!-- ul标签，结束 -->
+      <ul> <!-- ul标签，无序列表 -->
+        <li class="dropdown"> <!-- li标签，列表项，具有类名 "dropdown" -->
+          <a href="#transporte">Transporte &#9776;</a>
+          <div class="dropdown-content"> <!-- div标签，包含下拉菜单的容器，具有类名 "dropdown-content" -->
+            <a href="#t1">Avión</a>
+            <a href="#t2">Taxi</a>
+            <a href="#t3">T.Público París</a>
+          </div>
+        </li>
+        <li class="dropdown"> <!-- li标签，列表项，具有类名 "dropdown" -->
+          <a href="#menu">Itinerario de viaje &#9776;</a>
+          <!-- a标签，超链接，文本内容为 "Menu" 和一个Unicode字符 -->
+          <div class="dropdown-content"> <!-- div标签，包含下拉菜单的容器，具有类名 "dropdown-content" -->
+            <a href="#m1">Día 1</a> <!-- a标签，超链接 -->
+            <a href="#m2">Día 2</a> <!-- a标签，超链接 -->
+            <a href="#m3">Día 3</a> <!-- a标签，超链接 -->
+            <a href="#m4">Día 4</a> <!-- a标签，超链接 -->
+            <a href="#m5">Día 5</a> <!-- a标签，超链接 -->
+            <a href="#m6">Día 6</a> <!-- a标签，超链接 -->
+            <a href="#m7">Día 7</a> <!-- a标签，超链接 -->
+          </div> <!-- div标签，结束 -->
+        </li>
+          <li><a href="#gastos">Presupuesto</a></li>
+      </ul> <!-- ul标签，结束 -->
+    </nav> <!-- nav标签，结束 -->
+  </header> <!-- header标签，结束 -->
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const elementsToFadeIn = document.querySelectorAll(".intro");
+  
+      elementsToFadeIn.forEach((element, index) => {
+        setTimeout(() => {
+          element.classList.add("show");
+        }, index * 500);
+      });
+    });
+  </script>
+
+  <div id="home" class="intro"> <!-- div标签，包含首页内容，具有id "home" 和类名 "intro" -->
+    <h1>VIAJE A FRANCIA</h1> <!-- h1标签，一级标题，显示文本 "VIAJE A FRANCIA" -->
+    <p>¡Siete días en París!</p> <!-- p标签，段落，显示文本 "¡Siete días en París!" -->
+  </div> <!-- div标签，结束 -->
+
+  <div id="paris" class="content"> <!-- div标签，包含巴黎内容，具有id "paris" 和类名 "content" -->
+    <h1>París - Una ciudad romántica</h1> <!-- h1标签，一级标题，显示文本 "París - Una ciudad romántica" -->
+      <!-- h1标签，段落，带有内联样式，文本左对齐，左内边距为20px -->
+    <p>París, la hermosa capital de Francia, es una ciudad que emana romance y encanto, verdaderamente representando el espíritu romántico de Europa y del mundo entero.</p>
+      <!-- p标签，段落，带有内联样式，文本左对齐，左内边距为20px -->
+    <p>Pero París no solo es conocida por su romanticismo, también alberga una multitud de atracciones icónicas que atraen a visitantes de todo el mundo. Desde la majestuosa Torre Eiffel hasta el venerable Museo del Louvre y la impresionante Catedral de Notre Dame, pasando por las serenas aguas del río Sena, París tiene mucho que ofrecer a quienes la visitan.</p>
+      <!-- p标签，段落，带有内联样式，文本左对齐，左内边距为20px -->
+    <p>Caminar por las calles de París es como sumergirse en un mundo de arte y cultura, donde cada esquina respira historia y creatividad. Esta ciudad de renombre mundial ofrece una experiencia única que cautiva a todos los que tienen la suerte de explorarla.</p>
+    <img style="text-align: left; padding-left: 250px;" src="./resource/img/paris.jfif?w=2071&q=80" onerror="this.src='https://plus.unsplash.com/premium_photo-1661919210043-fd847a58522d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1pYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80'" width="1000px" alt="image">
+    <!-- img标签，图像，具有源文件、onerror事件和替代文本属性 -->
+  </div> <!-- div标签，结束 -->
+
+
+  <div id="calendario" class="content">
+    <h1>Calendario</h1>
+    <h2>El itinerario de viaje específico</h2>
+    <p>Este emocionante viaje se extenderá a lo largo de 7 días y nos llevará a París, la hermosa capital de Francia.</p>
+    <p>Comienza el 24 de octubre y culminará el 30 de octubre de 2023.</p>
+    <p>Puedes acceder al cronograma detallado a través del siguiente enlace: <a href="https://calendar.google.com/calendar/u/2?cid=Y184NjdkNGU3NWI1N2I3MjU0NmU2OTllMGVjNDJkOTQxMjBlYWYyZTI1Y2U4ZWQwODY5MjMyNjRmMjQ2N2IxMGYyQGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20" style="text-decoration: none; color: red;">CALENDARIO</a></p>
+    <iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=1&bgcolor=%23ffffff&ctz=Europe%2FMadrid&title=CALENDARI_Wenjing_Chen&hl=es&src=Y184NjdkNGU3NWI1N2I3MjU0NmU2OTllMGVjNDJkOTQxMjBlYWYyZTI1Y2U4ZWQwODY1MjMyNjRmMjQ2N2IxMGYyQGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20&color=%2300cc5f" style="border:solid 1px #777" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+  </div>
+
+
+  <div id="alojamiento" class="content">
+    <h1>Alojamiento</h1>
+    <h2>Albergue: The People - Paris Belleville</h2>
+    <p>The People - Paris Belleville es un albergue juvenil situado en el centro de París, en el dinámico y popular barrio de Belleville. Es un espacio de convivencia donde puedes alojarte en habitaciones compartidas, ya sea con amigos o en solitario.</p>
+    <p>Ofrece las siguientes comodidades:</p>
+      <ul>
+          <li>Traslados al aeropuerto</li>
+          <li>Wi-Fi gratuito para huéspedes</li>
+          <li>Restaurante y bar de autoservicio en el establecimiento</li>
+          <li>Opción de desayuno pago</li>
+      </ul>
+      <img style="text-align: left; padding-left: 100px;"  src="./resource/img/albergue.jpg" onerror="this.src='https://dynamic-media-cdn.tripadvisor.com/media/photo-o/09/bb/12/0c/building.jpg?w=700&h=-1&s=1'" width="250px" alt="image">
+      <img style="text-align: left; padding-left: 100px;"  src="./resource/img/albergue2.jpg" onerror="this.src='https://cf.bstatic.com/xdata/images/hotel/max1024x768/110159235.jpg?k=21e5ebbbbe1ad08ff6bd54a4f58018805016102b6bd1d666d444a9af00e9455f&o=&hp=1'" width="650px" alt="image">
+      <p>El costo de una noche en una habitación compartida para seis personas es de 66.19 euros e incluye un delicioso desayuno. Esta opción es ideal para aquellos que buscan un alojamiento asequible que les prepare para disfrutar de las maravillas de París.</p>
+      <img style="text-align: left; padding-left: 20px;" src="./resource/img/albergue1.png" onerror="this.src='https://github.com/WeJ-Ch/probable-train/blob/963bfa0ab84195c1101ce31bb87bb253f77dc071/resources/img/albergue1.png?raw=true'" width="750px" alt="image">
+  </div>
+
+  <div id="transporte" class="content">
+    <h1>Transporte</h1>
+    <p style="text-align: center; font-size: 2em;">Transporte público necesario para llegar a París.</p>
+
+
+    <h2 id="t1">Avión</h2>
+    <p>Para llegar a la París, la opción más conveniente es tomar un vuelo desde el Aeropuerto Josep Tarradellas Barcelona-El Prat con destino al Aeropuerto de París-Charles de Gaulle.</p>
+    <img style="text-align: left; margin-left: 20px; padding-left: 20px;" src="./resource/img/avion.jpg?w=2071&q=80" onerror="this.src='https://www.aviationgroup.es/wp-content/uploads/2023/03/avion-volando-con-un-motor.jpg'" width="500px" alt="image"><iframe style=" margin-left: 50px;" src="https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d5773968.908422801!2d-2.969085796300121!3d45.03871245612349!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e4!4m5!1s0x12a49e64847c8ea5%3A0xf32be942fb6f9bd7!2zRWwgUHJhdCBkZSBMbG9icmVnYXQsIOW3tOWhnue9l-mCo-acuuWcug!3m2!1d41.2980327!2d2.0799026!4m5!1s0x47e63e038e4ccf5b%3A0x42be0982f5ba62c!2sAeropuerto%20de%20Par%C3%ADs-Charles%20de%20Gaulle%20(CDG)%2C%2095700%20Roissy-en-France%2C%20Francia!3m2!1d49.0078597!2d2.5507714999999997!5e0!3m2!1ses!2ses!4v1697487968379!5m2!1ses!2ses" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    <p>He gestionado una reserva de vuelo con la compañía Ryanair, y aquí está el horario detallado:</p>
+    <ul>
+      <li>Vuelo de Ida: Partiré de Barcelona a las 6:30 de la mañana y aterrizaré en París a las 8:25. </li>
+      <li>Vuelo de Regreso: Mi regreso a Barcelona está programado para las 8:15, y aterrizaré en Barcelona a las 10:00.</li>
+      Esta programación me permitirá disfrutar de un último día completo en París antes de emprender el viaje de regreso.
+    </ul>
+    <p>El costo total del boleto de avión ascendió a 117,64 euros.</p>
+    <img style="text-align: left; padding-left: 20px;" src="./resource/img/avion1.png" onerror="this.src='https://github.com/WeJ-Ch/probable-train/blob/main/resources/img/avion1.png?raw=true'" width="750px" alt="image">
+
+
+    <h2 id="t2">Taxi</h2>
+    <p>Para aquellos sin vehículo propio, la opción de transporte más cómoda para ir y volver del aeropuerto indudablemente es tomar un taxi. </p>
+    <p>En comparación con el autobús o el metro, el taxi puede llegar al aeropuerto con una anticipación de unos 30 minutos.</p>
+    <img style="text-align: left; margin-left: 20px; padding-left: 20px;" src="./resource/img/taxi.jpg" onerror="this.src='https://ajuntamentinforma.gramenet.cat/fileadmin/_processed_/c/3/csm_b48e7542-a57e-4e43-af20-ddedd993e5c0_76e14d21d8.jpg'" width="500px" alt="image"><iframe style=" margin-left: 50px;" src="https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d95798.46986246551!2d2.069460554532203!3d41.380554768884565!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e6!4m5!1s0x12a4bc833ffb0bff%3A0x424fe1eb6fe1eae0!2sCarrer%20de%20Ruperto%20Chap%C3%AD%2C%208%2C%20Santa%20Coloma%20de%20Gramanet!3m2!1d41.4511675!2d2.2200013!4m5!1s0x12a49e64847c8ea5%3A0xf32be942fb6f9bd7!2sAeropuerto%20Josep%20Tarradellas%20Barcelona-El%20Prat%2C%2008820%20El%20Prat%20de%20Llobregat%2C%20Barcelona!3m2!1d41.2980327!2d2.0799026!5e0!3m2!1ses!2ses!4v1697490660196!5m2!1ses!2ses" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    <p>El costo del taxi suele oscilar entre 39 y 48 euros aproximadamente.</p>
+    <img src="./resource/img/taxi1.png" onerror="this.src='https://github.com/WeJ-Ch/probable-train/blob/main/resources/img/taxi1.png?raw=true'" width="300px" alt="image">
+    
+    <h2 id="t3">Tránsito público en París</h2>
+    <p>Una vez en París, es esencial ahorrar dinero adquiriendo un billete semanal Navigo.</p>
+    <p>Por tan solo 30 euros, este billete te brinda viajes ilimitados en todas las zonas durante siete días, lo que resulta ideal para quienes planean una estancia de una semana y desean moverse con comodidad y economía.</p>
+    <img src="./resource/img/t3.png" onerror="this.src='https://github.com/WeJ-Ch/probable-train/blob/main/resources/img/t3.png?raw=true'" width="650px" alt="image">
+  </div>
+
+  <div id="menu" class="content">
+    <h1 style="text-align: center;">Itinerario de siete días en París</h1>
+    <p>Las atracciones que deseo visitar en diferentes fechas de mi viaje.</p>
+    
+    <h2 id="m1">Día 1</h2>
+    <p>Comenzó el viaje temprano en la mañana, a las 5:20, con un taxi al aeropuerto. </p>
+    <img src="./resource/img/d1.jpg" onerror="this.src='https://www.elllobregat.com/fotos/80/el_prat.jpeg'" width="700px" alt="image"><iframe src="https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d95798.46986246551!2d2.069460554532203!3d41.380554768884565!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e6!4m5!1s0x12a4bc833ffb0bff%3A0x424fe1eb6fe1eae0!2sCarrer%20de%20Ruperto%20Chap%C3%AD%2C%208%2C%20Santa%20Coloma%20de%20Gramanet!3m2!1d41.4511675!2d2.2200013!4m5!1s0x12a49e64847c8ea5%3A0xf32be942fb6f9bd7!2sAeropuerto%20Josep%20Tarradellas%20Barcelona-El%20Prat%2C%2008820%20El%20Prat%20de%20Llobregat%2C%20Barcelona!3m2!1d41.2980327!2d2.0799026!5e0!3m2!1ses!2ses!4v1697490660196!5m2!1ses!2ses" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    <p>A las 9 en punto, llegué al albergue The People - Paris Belleville, que ofrece comodidades como traslados al aeropuerto y desayuno.</p>
+    <iframe src="https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d83919.09278789595!2d2.4349476084283475!3d48.906405615516285!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e0!4m5!1s0x47e63e038e4ccf5b%3A0x42be0982f5ba62c!2zRnJhbmNpYSwgUm9pc3N5LWVuLUZyYW5jZSwg5be06buO5aSP5bCUwrfmiLTpq5jkuZDmnLrlnLo!3m2!1d49.0078597!2d2.5507714999999997!4m5!1s0x47e66de5fa13e237%3A0xb6f85f55cacbf787!2sThe%20People%20-%20Paris%20Belleville%2C%2059%20Bd%20de%20Belleville%2C%2075011%20Paris%2C%20Francia!3m2!1d48.870027799999995!2d2.3789146!5e0!3m2!1ses!2ses!4v1697569172709!5m2!1ses!2ses" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    <p>Mi primera parada del día me llevó a explorar el distintivo barrio de Belleville, famoso por su arte callejero, atmósfera multicultural y la abundancia de bares y restaurantes de moda. Cada callejón parecía albergar una sorpresa artística, y las calles estaban llenas de vida y diversidad cultural.</p>
+    <img src="./resource/img/d1.2.jpg" onerror="this.src='https://parisenmetro.eu/wp-content/uploads/2023/05/barrio-belleville-paris.jpg'" width="650px" alt="image"><iframe src="https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d5248.614117453623!2d2.38122662809655!3d48.871422706066!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e2!4m5!1s0x47e66de5fa13e237%3A0xb6f85f55cacbf787!2sThe%20People%20-%20Paris%20Belleville%2C%20Boulevard%20de%20Belleville%2C%20Par%C3%ADs%2C%20Francia!3m2!1d48.870027799999995!2d2.3789146!4m5!1s0x47e66deb8dcf4d1d%3A0x6193d771823c73f6!2sBelleville%2C%20Par%C3%ADs%2C%20Francia!3m2!1d48.8728179!2d2.389461!5e0!3m2!1ses!2ses!4v1697569375269!5m2!1ses!2ses" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    <p>Luego, visité el Museo Nacional Picasso-París, un lugar donde el arte cobra vida a través de las obras del renombrado pintor español.</p>
+    <img src="./resource/img/d1.3.jpg" onerror="this.src='https://parisjetaime.com/data/layout_image/fr-FR/Mus%C3%A9e-National-Picasso-Paris-H%C3%B4tel-Sal%C3%A9--630x405--%C2%A9-Mus%C3%A9e-National-Picasso-Paris-Voyez-Vous-Chlo%C3%A9-Vollmer-Lo.jpg'" width="650px" alt="image"><iframe src="https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d10498.811270020755!2d2.3731403537710083!3d48.863877096865245!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e3!4m5!1s0x47e66deb8dcf4d1d%3A0x6193d771823c73f6!2sBelleville%2C%2075020%20Par%C3%ADs%2C%20Francia!3m2!1d48.8728179!2d2.389461!4m5!1s0x47e66e0142746b4b%3A0xc191da9af2fc6df7!2sMuseo%20Picasso%20de%20Par%C3%ADs%2C%20Rue%20de%20Thorigny%2C%20Par%C3%ADs%2C%20Francia!3m2!1d48.8596668!2d2.3626138!5e0!3m2!1ses!2ses!4v1697569613018!5m2!1ses!2ses" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    <p>Para el almuerzo, opté por un restaurante local acogedor y caminé por el Marais. Las tiendas repletas de tesoros y curiosidades hicieron que mi tarde fuera aún más especial.</p>
+    <img src="./resource/img/d1.4.jpg" onerror="this.src='https://www.nyhabitat.com/sp/blog/wp-content/uploads/2013/08/calles-marais-paris-francia.jpg'" width="650px" alt="image"><iframe src="https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d6288.156280795154!2d2.3634134607627533!3d48.8615759195473!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e2!4m5!1s0x47e66dfd18c303f7%3A0xe4582768b5b64fb9!2sOber%20Mamma!3m2!1d48.864450899999994!2d2.3701426999999997!4m5!1s0x47e66e03cdce4ae9%3A0x38cfa580446f9e46!2sLe%20Marais%2C%20Par%C3%ADs%2C%20Francia!3m2!1d48.861232699999995!2d2.3581892!5e0!3m2!1ses!2ses!4v1697571711838!5m2!1ses!2ses" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    <p>La noche cayó suavemente sobre París, y después de disfrutar de una deliciosa cena, regresé al albergue para recargar energías.</p>
+    <img src="./resource/img/d1.5.jpg" onerror="this.src='https://a.cdn-hotels.com/gdcs/production167/d641/303388e2-ca98-4e58-8011-da402798b808.jpg'" width="700px" alt="image"><iframe src="https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d10498.350974347286!2d2.358018764792826!3d48.86607120671475!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e3!4m5!1s0x47e66e03cdce4ae9%3A0x38cfa580446f9e46!2sLe%20Marais%2C%20Par%C3%ADs%2C%20Francia!3m2!1d48.861232699999995!2d2.3581892!4m5!1s0x47e66de5fa13e237%3A0xb6f85f55cacbf787!2sThe%20People%20-%20Paris%20Belleville%2C%2059%20Bd%20de%20Belleville%2C%2075011%20Paris%2C%20Francia!3m2!1d48.870027799999995!2d2.3789146!5e0!3m2!1ses!2ses!4v1697633912069!5m2!1ses!2ses" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+
+    <h2 id="m2">Día 2</h2>
+    <p>El segundo día comenzó con un delicioso desayuno en el albergue. Luego, me dirigí al majestuoso Louvre, un lugar que alberga siglos de historia y algunas de las obras de arte más icónicas del mundo, incluyendo la Mona Lisa y la Venus de Milo. El Louvre es impresionante tanto por su arquitectura como por su vasta colección.</p>
+    <img src="./resource/img/d2.webp" onerror="this.src='https://media.cntraveler.com/photos/57d961ce3e6b32bf25f5ad0f/16:9/w_2560,c_limit/most-beautiful-paris-louvre-GettyImages-536267205.jpg'" width="700px" alt="image"><iframe src="https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d14218.351128344!2d2.3430013313009037!3d48.862901581584126!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e3!4m5!1s0x47e66de5fa13e237%3A0xb6f85f55cacbf787!2sThe%20People%20-%20Paris%20Belleville%2C%2059%20Bd%20de%20Belleville%2C%2075011%20Paris%2C%20Francia!3m2!1d48.870027799999995!2d2.3789146!4m5!1s0x47e671d877937b0f%3A0xb975fcfa192f84d4!2sLouvre%20Museum%2C%20Par%C3%ADs%2C%20Francia!3m2!1d48.8606111!2d2.337644!5e0!3m2!1ses!2ses!4v1697633954463!5m2!1ses!2ses" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    <p>Al mediodía, opté por un almuerzo tranquilo antes de aventurarme a los Jardines de las Tullerías, un parque exquisito que se extiende desde el Louvre hasta la Place de la Concorde.</p>
+    <img src="./resource/img/d2.1.avif" onerror="this.src='https://cdn.pariscityvision.com/library/image/5470.jpg'" width="700px" alt="image"><iframe src="https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d5249.503671730033!2d2.326240845538376!3d48.862942443447736!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e2!4m5!1s0x47e671d877937b0f%3A0xb975fcfa192f84d4!2sMuseo%20del%20Louvre%2C%20Par%C3%ADs%2C%20Francia!3m2!1d48.8606111!2d2.337644!4m5!1s0x47e66e2c30000001%3A0xc219db09e1bfefc7!2zSmFyZMOtbiBkZSBsYXMgVHVsbGVyw61hcywgUGFyw61zLCBGcmFuY2lh!3m2!1d48.863491599999996!2d2.3274942999999997!5e0!3m2!1ses!2ses!4v1697634423223!5m2!1ses!2ses" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    <p>Más tarde, exploré la famosa Place de la Concorde, donde me encontré frente al Obelisco de Luxor, un obelisco egipcio de 3.300 años de antigüedad, que fue un regalo del gobierno egipcio a Francia en el siglo XIX.</p>
+    <img src="./resource/img/d2.2.jpg" onerror="this.src='https://aloha.fr/wp-content/uploads/2018/07/place-de-la-concorde.jpg'" width="700px" alt="image"><iframe src="https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d2624.690704930448!2d2.321790076056922!3d48.86410805030462!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e2!4m5!1s0x47e66e2c30000001%3A0xc219db09e1bfefc7!2sJard%C3%ADn%20de%20las%20Tuller%C3%ADas%2C%2075001%20Paris%2C%20Francia!3m2!1d48.863491599999996!2d2.3274942999999997!4m5!1s0x47e66fcd61ae0a01%3A0x18030de10e25ab2c!2sPlace%20de%20la%20Concorde%2C%20Par%C3%ADs%2C%20Francia!3m2!1d48.8656331!2d2.3212357!5e0!3m2!1ses!2ses!4v1697634494605!5m2!1ses!2ses" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+    <h2 id="m3">Día 3</h2>
+    <p>Mi siguiente destino me llevó al imponente Arco del Triunfo. El Arco del Triunfo es un monumento icónico de París y un símbolo de la grandeza militar de Francia. Su diseño es imponente, con una amplia avenida que se irradia desde su base, conocida como la Avenue des Champs-Élysées.</p>
+    <img src="./resource/img/d3.webp" onerror="this.src='https://parisando.b-cdn.net/wp-content/uploads/sites/11/2022/02/portada-arco.jpg'" width="700px" alt="image"><iframe src="https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d41995.547856076126!2d2.3037572298961972!3d48.86351627622089!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e3!4m5!1s0x47e66de5fa13e237%3A0xb6f85f55cacbf787!2sThe%20People%20-%20Paris%20Belleville%2C%2059%20Bd%20de%20Belleville%2C%2075011%20Paris%2C%20Francia!3m2!1d48.870027799999995!2d2.3789146!4m5!1s0x47e66fec70fb1d8f%3A0xd9b5676e112e643d!2sArco%20de%20Triunfo%20de%20Par%C3%ADs%2C%20Plaza%20Charles%20de%20Gaulle%2C%20Par%C3%ADs%2C%20Francia!3m2!1d48.8737917!2d2.2950274999999998!5e0!3m2!1ses!2ses!4v1697633995417!5m2!1ses!2ses" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    <p>La avenida la Champs-Élysées es conocida por sus tiendas elegantes, restaurantes sofisticados y la vibrante vida nocturna. Paseé por sus aceras llenas de boutiques de moda, donde pude admirar escaparates llenos de productos de diseñadores de renombre. Fue una tarde perfecta para disfrutar de compras y observación de la gente, ya que la avenida estaba llena de locales y turistas disfrutando de su encanto.</p>
+    <img src="./resource/img/d3.1.jpg" onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/6/6d/Avenue_des_Champs-%C3%89lys%C3%A9es_July_24%2C_2009_N1.jpg'" width="700px" alt="image"><iframe src="https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d1312.0983962642833!2d2.2951925888507083!3d48.87352490698625!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e2!4m5!1s0x47e66fec70fb1d8f%3A0xd9b5676e112e643d!2sArco%20de%20Triunfo%20de%20Par%C3%ADs%2C%20Pl.%20Charles%20de%20Gaulle%2C%2075008%20Paris%2C%20Francia!3m2!1d48.8737917!2d2.2950274999999998!4m5!1s0x47e66fc4f8007851%3A0x5aa1a787f38f64f6!2sAv.%20de%20los%20Campos%20El%C3%ADseos%2C%2075008%20Paris%2C%20Francia!3m2!1d48.872960199999994!2d2.2978525999999997!5e0!3m2!1ses!2ses!4v1697634535005!5m2!1ses!2ses" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    <p>Fue un día lleno de exploración y descubrimiento en uno de los lugares más emblemáticos de París. </p>
+    <img src="./resource/img/d3.2.webp" onerror="this.src='https://phantom-elmundo.unidadeditorial.es/7fb575de94cfef810a8eda14ffcdea9c/crop/0x0/2047x1365/resize/1200/f/webp/assets/multimedia/imagenes/2020/10/18/16029731928455.jpg'" width="700px" alt="image"><iframe src="https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d41995.547856076126!2d2.3043928798961497!3d48.86351627622089!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e3!4m5!1s0x47e66fc4f8007851%3A0x5aa1a787f38f64f6!2sAv.%20de%20los%20Campos%20El%C3%ADseos%2C%2075008%20Paris%2C%20Francia!3m2!1d48.872960199999994!2d2.2978525999999997!4m5!1s0x47e66de5fa13e237%3A0xb6f85f55cacbf787!2sThe%20People%20-%20Paris%20Belleville%2C%20Boulevard%20de%20Belleville%2C%20Par%C3%ADs%2C%20Francia!3m2!1d48.870027799999995!2d2.3789146!5e0!3m2!1ses!2ses!4v1697634578807!5m2!1ses!2ses" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+    <h2 id="m4">Día 4</h2>
+    <p>Ya es el cuarto día de mi viaje por Francia, y me dirigí hacia uno de los lugares más emblemáticos de París: la Torre Eiffel. La torre se alzaba imponente ante mí, destacándose en el horizonte parisino. La Torre Eiffel es un ícono de la ciudad y un testimonio de la ingeniería y la belleza arquitectónica. Subir a la cima de la torre ofrece una vista panorámica inigualable de la ciudad, lo que hace que la visita sea verdaderamente inolvidable.</p>
+    <img src="./resource/img/d4.webp" onerror="this.src='https://media.revistaad.es/photos/623afa2660f0ecf0c5bf585f/16:9/w_2560%2Cc_limit/GettyImages-1067622670.jpg'" width="700px" alt="image"><iframe src="https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d41991.13810196924!2d2.2919804299769506!3d48.868771220474436!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e3!4m5!1s0x47e66de5fa13e237%3A0xb6f85f55cacbf787!2sThe%20People%20-%20Paris%20Belleville%2C%2059%20Bd%20de%20Belleville%2C%2075011%20Paris%2C%20Francia!3m2!1d48.870027799999995!2d2.3789146!4m5!1s0x47e66e2964e34e2d%3A0x8ddca9ee380ef7e0!2sTorre%20Eiffel%2C%20Avenue%20Anatole%20France%2C%20Par%C3%ADs%2C%20Francia!3m2!1d48.858370099999995!2d2.2944812999999997!5e0!3m2!1ses!2ses!4v1697634025886!5m2!1ses!2ses" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    <p>Tras disfrutar de la Torre Eiffel, decidí dar un tranquilo paseo a lo largo del río Sena. El Sena es el corazón de París y un lugar perfecto para relajarse y disfrutar de la serenidad que ofrece la ciudad.</p>
+    <img src="./resource/img/d4.1.jpg" onerror="this.src='https://cdn.getyourguide.com/img/location/60096d2cebeac.jpeg/99.jpg'" width="700px" alt="image"><iframe src="https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d2624.911312158354!2d2.2913464760566606!3d48.85990155060073!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e2!4m5!1s0x47e66e2964e34e2d%3A0x8ddca9ee380ef7e0!2sTorre%20Eiffel%2C%20Champ%20de%20Mars%2C%205%20Av.%20Anatole%20France%2C%2075007%20Paris%2C%20Francia!3m2!1d48.858370099999995!2d2.2944812999999997!4m5!1s0x47e66ff769afd7f9%3A0xb5bc82e867cff90d!2sRio%20Sena%2C%20Port%20de%20la%20Bourdonnais%2C%20Par%C3%ADs%2C%20Francia!3m2!1d48.861425999999994!2d2.294944!5e0!3m2!1ses!2ses!4v1697634691011!5m2!1ses!2ses" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    <p>Por la tarde, exploré los Jardines de Trocadéro, un hermoso parque con vistas panorámicas de la Torre Eiffel. Los jardines son un oasis de tranquilidad en medio de la bulliciosa ciudad, y el contraste entre la naturaleza y la estructura metálica de la Torre Eiffel crea un escenario impresionante.</p>
+    <img src="./resource/img/d4.2.jpg" onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/c/ca/Jardins_du_Trocad%C3%A9ro_1986-152.jpg'" width="700px" alt="image"><iframe src="https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d2624.7638559007487!2d2.2907734260568136!3d48.862713250402834!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e2!4m5!1s0x47e66fe167ffc20f%3A0x48dfbd95893032ee!2s300%20Port%20de%20la%20Bourdonnais%2C%2075007%20Paris%2C%20Francia!3m2!1d48.8609532!2d2.2950725999999997!4m5!1s0x47e66fe3473716a3%3A0xe9200d1a1843c45a!2sJardines%20del%20Trocadero%2C%20Place%20du%20Trocad%C3%A9ro%20et%20du%2011%20Novembre%2C%20Par%C3%ADs%2C%20Francia!3m2!1d48.861596299999995!2d2.2892823!5e0!3m2!1ses!2ses!4v1697634721960!5m2!1ses!2ses" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+    <h2 id="m5">Día 5</h2>
+    <p>Mi siguiente parada me llevó a uno de los puntos emblemáticos de la ciudad: la Catedral de Notre-Dame, una joya de la arquitectura gótica con detalles impresionantes en su fachada. Desafortunadamente, la catedral está en reconstrucción debido a un incendio en 2019, pero su grandeza sigue siendo evidente.</p>
+    <img src="./resource/img/d5.avif" onerror="this.src='https://www.paris.es/f/francia/paris/guia/catedral-notre-dame-m.jpg'" width="700px" alt="image"><iframe src="https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d10499.101028110337!2d2.353753914789419!3d48.86249585771545!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e3!4m5!1s0x47e66de5fa13e237%3A0xb6f85f55cacbf787!2sThe%20People%20-%20Paris%20Belleville%2C%2059%20Bd%20de%20Belleville%2C%2075011%20Paris%2C%20Francia!3m2!1d48.870027799999995!2d2.3789146!4m5!1s0x47e671e19ff53a01%3A0x36401da7abfa068d!2sCatedral%20de%20Notre%20Dame%2C%20Parvis%20Notre-Dame%20-%20place%20Jean-Paul-II%2C%20Par%C3%ADs%2C%20Francia!3m2!1d48.8529682!2d2.3499021!5e0!3m2!1ses!2ses!4v1697634056093!5m2!1ses!2ses" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    <p>Luego, exploré el Barrio Latino, conocido por su ambiente bohemio y sus calles estrechas. Disfruté de una visita a las librerías de la Rue de la Huchette y de un café en una acogedora cafetería.</p>
+    <img src="./resource/img/d5.1.jpg" onerror="this.src='https://www.tourleader.net/images/parigi/quartieri/quartiere-latino.jpg'" width="700px" alt="image"><iframe src="https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d2625.3178133376327!2d2.3451544260561947!3d48.85214975114622!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e2!4m5!1s0x47e671e19ff53a01%3A0x36401da7abfa068d!2sCatedral%20de%20Notre%20Dame%2C%20Parvis%20Notre-Dame%20-%20place%20Jean-Paul-II%2C%20Par%C3%ADs%2C%20Francia!3m2!1d48.8529682!2d2.3499021!4m5!1s0x47e671de08f86641%3A0xc7f1c0b5dd1dcc15!2sBarrio%20Latino%20de%20Par%C3%ADs%2C%20Par%C3%ADs%2C%20Francia!3m2!1d48.850853699999995!2d2.3455566!5e0!3m2!1ses!2ses!4v1697634816116!5m2!1ses!2ses" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    <p>Por la noche, disfruté de un crucero por el río Sena, donde la ciudad se iluminó y se reflejó en las aguas del Sena.</p>
+    <img src="./resource/img/d5.2.jpg" onerror="this.src='https://www.101viajes.com/sites/default/files/crucero-sena-noche.jpg'" width="700px" alt="image"><iframe src="https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d21001.693860757805!2d2.2955697245138893!3d48.854172752818236!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e3!4m5!1s0x47e671de08f86641%3A0xc7f1c0b5dd1dcc15!2sBarrio%20Latino%20de%20Par%C3%ADs%2C%20Par%C3%ADs%2C%20Francia!3m2!1d48.850853699999995!2d2.3455566!4m5!1s0x47e66ff769afd7f9%3A0xb5bc82e867cff90d!2sRio%20Sena%2C%20Port%20de%20la%20Bourdonnais%2C%20Par%C3%ADs%2C%20Francia!3m2!1d48.861425999999994!2d2.294944!5e0!3m2!1ses!2ses!4v1697634857819!5m2!1ses!2ses" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+    <h2 id="m6">Día 6</h2>
+    <p>El penúltimo día me llevó a Disneyland París, donde disfruté de emocionantes atracciones y exploré áreas temáticas como Adventureland, Fantasyland y Frontierland.</p>
+    <img src="./resource/img/d6.jpg" onerror="this.src='https://dynamic-media-cdn.tripadvisor.com/media/photo-o/26/92/e4/97/disneyland-paris.jpg?w=1200&h=-1&s=1'" width="700px" alt="image"><iframe src="https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d117072.61605394768!2d2.505399627418218!3d48.86599023499499!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e3!4m5!1s0x47e66de5fa13e237%3A0xb6f85f55cacbf787!2sThe%20People%20-%20Paris%20Belleville%2C%2059%20Bd%20de%20Belleville%2C%2075011%20Paris%2C%20Francia!3m2!1d48.870027799999995!2d2.3789146!4m5!1s0x47e61d19ca7ae2bd%3A0x57faf8cb6310e660!2sDisneyland%20Paris%2C%20Boulevard%20de%20Parc%2C%20Coupvray%2C%20Francia!3m2!1d48.8673858!2d2.7835929999999998!5e0!3m2!1ses!2ses!4v1697634108993!5m2!1ses!2ses" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+    <h2 id="m7">Día 7</h2>
+    <p>El último día me levanté temprano y me dirigí al aeropuerto de París. Poniendo fin a una semana llena de exploración y descubrimientos en la hermosa ciudad de París.</p>
+    <img src="./resource/img/d7.1.webp" onerror="this.src='https://i1.wp.com/www.reclamador.es/blog/wp-content/uploads/2018/09/guia-aeropuertos-paris-reclamador.png?fit=1200%2C800&ssl=1'" width="700px" alt="image"><iframe src="https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d167744.83805001152!2d2.2683569300081063!3d48.93419240592457!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e3!4m5!1s0x47e66de5fa13e237%3A0xb6f85f55cacbf787!2sThe%20People%20-%20Paris%20Belleville%2C%2059%20Bd%20de%20Belleville%2C%2075011%20Paris%2C%20Francia!3m2!1d48.870027799999995!2d2.3789146!4m5!1s0x47e63e038e4ccf5b%3A0x42be0982f5ba62c!2sAeropuerto%20de%20Par%C3%ADs-Charles%20de%20Gaulle%2C%2095700%20Roissy-en-France%2C%20Francia!3m2!1d49.0078597!2d2.5507714999999997!5e0!3m2!1ses!2ses!4v1697655887066!5m2!1ses!2ses" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+  </div>
+
+  <div id="gastos" class="content">
+    <h1>Presupuesto</h1>
+    <p>El siguiente es un presupuesto detallado para viajar:</p>
+
+    <table>
+      <thead>
+          <tr>
+              <th></th>
+              <th>Alejamiento</th>
+              <th>Comidas</th>
+              <th>Transporte</th>
+              <th>Atracciones</th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr>
+              <td>Dia 1</td>
+              <td>66,19€/noche+desayuno</td>
+              <td>Almuerzo:8,50€<br>
+                  Cena: 13€<br>
+                  Recuerdos comprados: 15€<br> </td>
+              <td>
+                Billete ida y vuelta: 117,64€<br>
+                Taxi: 42€<br>
+                Billete semanal: 30€</td>
+              <td>Museo Nacional Picasso-París: 14€</td>
+          </tr>
+          <tr>
+              <td>Dia 2</td>
+              <td>66,19€/noche+desayuno</td>
+              <td>Almuerzo:8,25€<br>
+                  Cena: 12,70€<br>
+                </td>
+              <td>Billete semanal</td>
+              <td>Museo del Louvre: Gratis</td>
+          </tr>
+          <tr>
+              <td>Dia 3</td>
+              <td>66,19€/noche+desayuno</td>
+              <td>Almuerzo:9,50€<br>
+                  Cena: 14,60€<br></td>
+              <td>Billete semanal</td>
+              <td>Arco del Triunfo: Gratis</td>
+          </tr>
+          <tr>
+              <td>Dia 4</td>
+              <td>66,19€/noche+desayuno</td>
+              <td>Almuerzo:11,90€<br>
+                  Cena: 13€<br></td>
+              <td>Billete semanal</td>
+              <td>Torre Eiffel: 10,70€</td>
+          </tr>
+          <tr>
+              <td>Dia 5</td>
+              <td>66,19€/noche+desayuno</td>
+              <td>Almuerzo:9€<br>
+                  Cena: 14,20€<br>
+                  Recuerdos comprados: 16€<br></td>
+              <td>Billete semanal</td>
+              <td>Catedral de Notre Dame: Cerrada<br>
+                  Crucero por el río Sena: 16€<br>
+              </td>
+          </tr>
+          <tr>
+              <td>Dia 6</td>
+              <td>66,19€/noche+desayuno</td>
+              <td>Almuerzo:10,50€<br>
+                  Cena: 14,30€<br>
+                  Recuerdos comprados: 18€<br></td>
+              <td>Billete semanal</td>
+              <td>Disneyland París: 62€</td>
+          </tr>
+          <tr>
+              <td>Dia 7</td>
+              <td>66,19€/noche+desayuno</td>
+              <td>Almuerzo:10,80€<br></td>
+              <td>Billete ida y vuelta<br>
+                Taxi: 42€<br>
+                Billete semanal<br></td>
+              <td>-</td>
+          </tr>
+          <tr>
+            <td>Costo Total</td>
+            <td>463,33€</td>
+            <td>199,25€</td>
+            <td>231,64€</td>
+            <td>102,70€</td>
+        </tr>
+      </tbody>
+  </table>
+
+  <p>Con un presupuesto total de 1000€, gasté un total de 996,92€ en el viaje.</p>
+  
+  <p style="font-size: 5em;">¡Gracias por ver mi Web!</p>
+  <p style="text-align: right;"> Creador de web: Wenjing Chen </p>
+  <img style="margin-left: 1280px;" src="./resource/img/logo-no-background.png" onerror="this.src='https://github.com/WeJ-Ch/Pt2-Viaje-en-Francia/blob/main/Web/resource/img/logo-no-background.png?raw=true'" width="200px" alt="image">
+  </div>
+
+</body>
+</html>
